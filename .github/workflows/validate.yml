@@ -1,4 +1,4 @@
-﻿name: Validate manifests
+﻿name: Validate FETCH zip source
 
 on:
   pull_request:
@@ -11,6 +11,6 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate package and graph manifests
+      - name: Validate FETCH zip source
         shell: pwsh
-        run: ./scripts/validate-manifests.ps1
+        run: ./scripts/validate-fetch-zip-source.ps1

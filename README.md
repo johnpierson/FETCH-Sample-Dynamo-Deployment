@@ -1,60 +1,52 @@
-﻿# Dynamo Revit 2027 Package and Graph Management Sample
+﻿# FETCH Revit 2027 Zip Structure Sample
 
-This sample repository demonstrates a Git-friendly folder structure for managing Dynamo packages and Dynamo graphs for a Revit 2027 / Dynamo Core 4.1 environment.
+This repository shows the folder structure a firm can zip and give to FETCH for Revit 2027 package and graph syncing.
 
-The package examples are based on a local Dynamo package cache from:
+The important folder is `fetch-zip-source`. Zip the contents of that folder, or use the included build script, and point FETCH at the resulting `.zip` file, GitHub release asset, or local folder.
 
-`%APPDATA%\Dynamo\Dynamo Core\4.1\packages`
-
-This repository intentionally stores package manifests and dependency records instead of vendoring every package binary. The goal is to make package versioning, graph ownership, review, and environment promotion easy to understand in Git.
-
-## Repository layout
+## Zip Root
 
 ```text
-.
-|-- environments/
-|   `-- revit-2027-dynamo-4.1/
-|       |-- package-lock.json
-|       `-- README.md
-|-- packages/
-|   `-- revit-2027/
-|       |-- clockwork-for-dynamo-3x/pkg.json
-|       |-- dynamo-text/pkg.json
-|       |-- monocle/pkg.json
-|       |-- rhythm/pkg.json
-|       `-- spring-nodes/pkg.json
-|-- graphs/
-|   |-- production/
-|   |   |-- model-health/
-|   |   `-- sheet-setup/
-|   `-- sandbox/
-|       `-- package-smoke-test/
-|-- docs/
-|   |-- package-versioning.md
-|   `-- graph-management.md
-`-- scripts/
-    `-- validate-manifests.ps1
+fetch-zip-source/
+`-- 2027/
+    |-- Packages/
+    |   |-- Clockwork for Dynamo 3.x/
+    |   |   `-- pkg.json
+    |   |-- Dynamo Text/
+    |   |   `-- pkg.json
+    |   |-- Monocle/
+    |   |   `-- pkg.json
+    |   |-- Rhythm/
+    |   |   `-- pkg.json
+    |   `-- spring nodes/
+    |       `-- pkg.json
+    `-- Dynamo Graphs/
+        |-- Model Health Audit/
+        |   `-- Model Health Audit.dyn
+        |-- Sheet Setup/
+        |   `-- Sheet Setup.dyn
+        `-- Package Smoke Test/
+            `-- Package Smoke Test.dyn
 ```
 
-## Intended workflow
+FETCH also supports sibling version folders such as `2025`, `2026`, `Revit 2027`, or `R27`. This sample focuses on `2027` because the package examples represent a Revit 2027/Dynamo 4.1 setup.
 
-1. Pin package versions in `environments/revit-2027-dynamo-4.1/package-lock.json`.
-2. Store one package manifest per package under `packages/revit-2027/<package-slug>/pkg.json`.
-3. Store each graph in its own folder with a `graph.json` ownership manifest and the `.dyn` file.
-4. Review graph changes and package changes separately in pull requests.
-5. Promote graph folders from `graphs/sandbox` to `graphs/production` only after package dependencies are pinned.
+## What FETCH Does
 
-## Why this shape works
+- Copies `2027/Packages` into the active Dynamo package folder for Revit 2027.
+- Copies `2027/Dynamo Graphs` into `Documents\FETCH Dynamo Graphs\2027`, unless FETCH is configured with a custom graph root.
+- Accepts folder aliases: `Packages` or `Package`, and `Dynamo Graphs`, `DynamoGraphs`, or `Graphs`.
 
-- Package metadata has stable paths and small diffs.
-- Graph folders can own documentation, screenshots, test fixtures, and the `.dyn` file together.
-- Environment locks make Revit/Dynamo upgrades explicit instead of implicit workstation state.
-- CI can validate manifests before anyone opens Dynamo.
-
-## Quick validation
+## Build The Zip
 
 Run this from the repository root:
 
 ```powershell
-./scripts/validate-manifests.ps1
+./scripts/build-fetch-zip.ps1
 ```
+
+The script writes `dist/fetch-revit-2027-sample.zip`.
+
+## Real Package Payloads
+
+This sample keeps each package folder small by including only `pkg.json` and a note. For a real firm package source, copy the entire installed package folder from Dynamo, including required `bin`, `dyf`, `doc`, and `extra` folders.
