@@ -1,0 +1,17 @@
+﻿{
+    "name":  "package-smoke-test",
+    "title":  "Package Smoke Test",
+    "stage":  "sandbox",
+    "owner":  "Dynamo Platform",
+    "environment":  "revit-2027-dynamo-4.1",
+    "purpose":  "Confirms the pinned package set loads in Dynamo Core 4.1 before graph promotion.",
+    "dynamoFile":  "package-smoke-test.dyn",
+    "packages":  [
+                     "dynamo-text",
+                     "monocle",
+                     "rhythm",
+                     "spring-nodes",
+                     "clockwork-for-dynamo-3x"
+                 ],
+    "smokeTest":  "Open the graph in Dynamo for Revit 2027, resolve packages from the environment lock, run once on a detached sample model, and confirm no unresolved nodes."
+}

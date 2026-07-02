@@ -1,0 +1,19 @@
+﻿# Local Dynamo/Revit state
+*.backup
+*.log
+*.tmp
+*.rvt
+*.rfa
+*.rte
+
+# Optional package payloads if this sample is expanded
+packages/**/bin/
+packages/**/extra/
+packages/**/*.dll
+packages/**/*.pdb
+packages/**/*.zip
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/

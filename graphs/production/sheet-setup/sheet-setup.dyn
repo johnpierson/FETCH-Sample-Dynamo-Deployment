@@ -1,0 +1,52 @@
+﻿{
+    "Nodes":  [
+
+              ],
+    "Connectors":  [
+
+                   ],
+    "ElementResolver":  {
+                            "ResolutionMap":  {
+
+                                              }
+                        },
+    "NodeLibraryDependencies":  [
+
+                                ],
+    "View":  {
+                 "Dynamo":  {
+                                "IsVisibleInDynamoLibrary":  true,
+                                "HasRunWithoutCrash":  false,
+                                "Version":  "4.1.0.0",
+                                "ScaleFactor":  1
+                            },
+                 "Camera":  {
+                                "LookZ":  0,
+                                "EyeY":  0,
+                                "EyeZ":  50,
+                                "UpZ":  0,
+                                "UpY":  1,
+                                "Name":  "Background Preview",
+                                "UpX":  0,
+                                "LookX":  0,
+                                "EyeX":  0,
+                                "LookY":  0
+                            }
+             },
+    "Dependencies":  [
+
+                     ],
+    "Name":  "Sheet Setup",
+    "Description":  "Sheet Setup placeholder graph for repository structure demonstration.",
+    "Bindings":  [
+
+                 ],
+    "Inputs":  [
+
+               ],
+    "Uuid":  "d684120f-6b77-4f85-8c83-1498db8f7fc7",
+    "Outputs":  [
+
+                ],
+    "IsCustomNode":  false
+}
