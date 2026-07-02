@@ -1,0 +1,40 @@
+﻿{
+    "Uuid":  "128c16e9-27aa-4553-a91b-31b2ebec9b32",
+    "IsCustomNode":  false,
+    "Description":  "Example graph used to check that the packaged node set loads after FETCH syncs packages.",
+    "Name":  "Package Smoke Test",
+    "ElementResolver":  {
+                            "ResolutionMap":  {
+
+                                              }
+                        },
+    "Inputs":  [
+
+               ],
+    "Outputs":  [
+
+                ],
+    "Nodes":  [
+
+              ],
+    "Connectors":  [
+
+                   ],
+    "Dependencies":  [
+
+                     ],
+    "NodeLibraryDependencies":  [
+
+                                ],
+    "Bindings":  [
+
+                 ],
+    "View":  {
+                 "Dynamo":  {
+                                "IsVisibleInDynamoLibrary":  true,
+                                "HasRunWithoutCrash":  false,
+                                "Version":  "4.1.0.0",
+                                "ScaleFactor":  1
+                            }
+             }
+}

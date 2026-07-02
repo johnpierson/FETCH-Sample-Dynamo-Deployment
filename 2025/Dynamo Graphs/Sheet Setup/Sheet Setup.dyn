@@ -1,0 +1,40 @@
+﻿{
+    "Uuid":  "bab2fb51-c6e5-4b2d-9e96-0460a332d13f",
+    "IsCustomNode":  false,
+    "Description":  "Example production graph folder with its Dynamo file and supporting notes kept together.",
+    "Name":  "Sheet Setup",
+    "ElementResolver":  {
+                            "ResolutionMap":  {
+
+                                              }
+                        },
+    "Inputs":  [
+
+               ],
+    "Outputs":  [
+
+                ],
+    "Nodes":  [
+
+              ],
+    "Connectors":  [
+
+                   ],
+    "Dependencies":  [
+
+                     ],
+    "NodeLibraryDependencies":  [
+
+                                ],
+    "Bindings":  [
+
+                 ],
+    "View":  {
+                 "Dynamo":  {
+                                "IsVisibleInDynamoLibrary":  true,
+                                "HasRunWithoutCrash":  false,
+                                "Version":  "4.1.0.0",
+                                "ScaleFactor":  1
+                            }
+             }
+}

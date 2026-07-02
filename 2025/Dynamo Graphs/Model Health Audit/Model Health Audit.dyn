@@ -1,0 +1,40 @@
+﻿{
+    "Uuid":  "fe86da11-0611-4b7e-a219-2b6734e17973",
+    "IsCustomNode":  false,
+    "Description":  "Example production graph folder that would sync to the user graph destination for Revit 2027.",
+    "Name":  "Model Health Audit",
+    "ElementResolver":  {
+                            "ResolutionMap":  {
+
+                                              }
+                        },
+    "Inputs":  [
+
+               ],
+    "Outputs":  [
+
+                ],
+    "Nodes":  [
+
+              ],
+    "Connectors":  [
+
+                   ],
+    "Dependencies":  [
+
+                     ],
+    "NodeLibraryDependencies":  [
+
+                                ],
+    "Bindings":  [
+
+                 ],
+    "View":  {
+                 "Dynamo":  {
+                                "IsVisibleInDynamoLibrary":  true,
+                                "HasRunWithoutCrash":  false,
+                                "Version":  "4.1.0.0",
+                                "ScaleFactor":  1
+                            }
+             }
+}
