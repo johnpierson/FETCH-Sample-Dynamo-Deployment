@@ -1,4 +1,4 @@
-﻿# FETCH Revit 2027 Zip Structure Sample
+﻿# FETCH Sample Dynamo Deployment
 
 This repository shows the folder structure a firm can zip and give to FETCH for Revit 2027 package and graph syncing.
 
@@ -50,3 +50,4 @@ The script writes `dist/fetch-revit-2027-sample.zip`.
 ## Real Package Payloads
 
 This sample keeps each package folder small by including only `pkg.json` and a note. For a real firm package source, copy the entire installed package folder from Dynamo, including required `bin`, `dyf`, `doc`, and `extra` folders.
+
