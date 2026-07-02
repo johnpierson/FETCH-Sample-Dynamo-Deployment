@@ -1,4 +1,4 @@
-﻿name: Publish FETCH zip release
+﻿name: Publish FETCH deployment release
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Release tag to publish, such as v2027.0.0"
+        description: "Release tag to publish, such as v2027.0.1"
         required: true
         type: string
 
@@ -20,13 +20,45 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate FETCH zip source
+      - name: Validate FETCH deployment source
         shell: pwsh
-        run: ./scripts/validate-fetch-zip-source.ps1
+        run: |
+          $ErrorActionPreference = "Stop"
 
-      - name: Build FETCH zip
+          $versionRoot = Join-Path $PWD "2027"
+          $packagesRoot = Join-Path $versionRoot "Packages"
+          $graphsRoot = Join-Path $versionRoot "Dynamo Graphs"
+
+          foreach ($requiredPath in @($versionRoot, $packagesRoot, $graphsRoot)) {
+            if (-not (Test-Path -LiteralPath $requiredPath)) {
+              throw "Missing required FETCH folder: $requiredPath"
+            }
+          }
+
+          $packageFolders = Get-ChildItem -LiteralPath $packagesRoot -Directory
+          if ($packageFolders.Count -eq 0) {
+            throw "No package folders found under 2027/Packages"
+          }
+
+          foreach ($packageFolder in $packageFolders) {
+            $manifestPath = Join-Path $packageFolder.FullName "pkg.json"
+            if (-not (Test-Path -LiteralPath $manifestPath)) {
+              throw "Package folder is missing pkg.json: $($packageFolder.Name)"
+            }
+          }
+
+          $graphFiles = Get-ChildItem -LiteralPath $graphsRoot -Filter *.dyn -Recurse -File
+          if ($graphFiles.Count -eq 0) {
+            throw "No Dynamo graphs found under 2027/Dynamo Graphs"
+          }
+
+      - name: Build FETCH deployment zip
         shell: pwsh
-        run: ./scripts/build-fetch-zip.ps1
+        run: |
+          $ErrorActionPreference = "Stop"
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          Compress-Archive -Path "2027" -DestinationPath "dist/fetch-sample-dynamo-deployment.zip" -Force
+          Write-Host "Created dist/fetch-sample-dynamo-deployment.zip"
 
       - name: Resolve release tag
         id: release_tag
@@ -45,5 +77,5 @@ jobs:
 
             Use one of these URLs in FETCH:
             - Release page: https://github.com/johnpierson/FETCH-Sample-Dynamo-Deployment/releases/tag/${{ steps.release_tag.outputs.tag }}
-            - Direct zip asset: https://github.com/johnpierson/FETCH-Sample-Dynamo-Deployment/releases/download/${{ steps.release_tag.outputs.tag }}/fetch-revit-2027-sample.zip
-          files: dist/fetch-revit-2027-sample.zip
+            - Direct zip asset: https://github.com/johnpierson/FETCH-Sample-Dynamo-Deployment/releases/download/${{ steps.release_tag.outputs.tag }}/fetch-sample-dynamo-deployment.zip
+          files: dist/fetch-sample-dynamo-deployment.zip

@@ -1,5 +1,6 @@
-﻿# Generated zip output
+﻿# Generated release output
 dist/
+*.zip
 
 # Local Dynamo/Revit state
 *.backup
