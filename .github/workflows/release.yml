@@ -1,0 +1,49 @@
+﻿name: Publish FETCH zip release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to publish, such as v2027.0.0"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate FETCH zip source
+        shell: pwsh
+        run: ./scripts/validate-fetch-zip-source.ps1
+
+      - name: Build FETCH zip
+        shell: pwsh
+        run: ./scripts/build-fetch-zip.ps1
+
+      - name: Resolve release tag
+        id: release_tag
+        shell: pwsh
+        run: |
+          $tag = if ("${{ github.event_name }}" -eq "workflow_dispatch") { "${{ inputs.tag }}" } else { "${{ github.ref_name }}" }
+          "tag=$tag" >> $env:GITHUB_OUTPUT
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.release_tag.outputs.tag }}
+          name: FETCH Sample Dynamo Deployment ${{ steps.release_tag.outputs.tag }}
+          body: |
+            Sample FETCH deployment zip for Dynamo packages and graphs.
+
+            Use one of these URLs in FETCH:
+            - Release page: https://github.com/johnpierson/FETCH-Sample-Dynamo-Deployment/releases/tag/${{ steps.release_tag.outputs.tag }}
+            - Direct zip asset: https://github.com/johnpierson/FETCH-Sample-Dynamo-Deployment/releases/download/${{ steps.release_tag.outputs.tag }}/fetch-revit-2027-sample.zip
+          files: dist/fetch-revit-2027-sample.zip
